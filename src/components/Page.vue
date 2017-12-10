@@ -80,6 +80,7 @@
 export default {
     data(){
         return{
+            imageSrc: '',
             width: '',
             height : '',
             top : '',
@@ -92,7 +93,7 @@ export default {
             activeIndex: 0
         }
     },
-    props: ['imageSrc'],
+    props: [''],
 
     methods: {
         template: function(event){
@@ -125,8 +126,16 @@ export default {
                 maxwidth: 0
             };
             this.items.push(item);
-            this.width = 10;
-            this.height = 10;
+            var my_array = this.items;
+            var last_element = my_array.length - 1;
+            this.activeIndex = last_element;
+            var actindex = this.activeIndex;
+            // selectDiv(actindex);
+            this.width = this.items[actindex].width;
+            this.height = this.items[actindex].height;
+            this.top = 0;
+            this.left = 0;
+            this.rotate = 0;
         },
         closeFrame: function(index){
             this.items.splice(index,1);
@@ -141,6 +150,7 @@ export default {
             this.top = this.items[index].top,
             this.left = this.items[index].left,
             this.rotate = this.items[index].rotate
+            console.log(this.activeIndex);
         },
         save: function(){
             alert('template saved on console');
